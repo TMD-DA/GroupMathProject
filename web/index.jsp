@@ -12,42 +12,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Math Class Login</title>
     </head>
-    
+
     <body>
- <div id="wrapper">
+        <div id="wrapper">
             <header>
-                <h1>Login To Our Site</h1>
+                <h1>Welcome to Math School!</h1>
             </header>
-            <nav>
-                <a href="index.jsp">Login&emsp;&#124;</a>
-                <a href="">&emsp;Register&emsp;&#124;</a>
-                <a href="">&emsp;Your Profile&emsp;&#124;</a>
-                <a href="">&emsp;All Users</a>
-            </nav>
+            
             <main>
-                <div class="logout">
-                    <form action="Public">
-                        <input type="hidden" name="action" value="logout">
-                        <input type="submit" value="Logout">
-                    </form>
-                </div>
-                <div>
-                    
-                </div>
-                <div class="form">
-                    <form action="Public" method="post">
-                        <input type="hidden" name="action" value="login">
-
-                        <label>Username: </label>
-                        <input type="text" name="username"><br>
-
-                        <label>Password: </label>
-                        <input type="text" name="password"><br>
-                        <br>
-                        <input type="submit" value="login">
-                    </form>
-                </div>
+                <p>Please log in by clicking the button bellow.</p>
             </main>
+            <button>Login</button>
         </div>
         <footer>
             <p>Copyright &#169;2023</p>
