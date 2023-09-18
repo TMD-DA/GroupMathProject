@@ -16,7 +16,7 @@ public class ConnectionPool {
     private ConnectionPool() {
         try {
             InitialContext ic = new InitialContext();
-            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/useraccount_db"); //This will need to change pulled this from an old file just to have something in this folder so it hits github. Everything else should be alright in this file though.
+            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/mathdb"); 
         } catch (NamingException e) {
             LOG.log(Level.SEVERE, "*** data source lookup fail", e);
         }
