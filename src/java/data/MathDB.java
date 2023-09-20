@@ -84,4 +84,45 @@ public class MathDB {
             }
         }
     }
+    
+    public static User getUserInfo(String username, String password) throws SQLException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query
+                = "SELECT * "
+                + "FROM users "
+                + "WHERE username = ? AND password = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            User user = null;
+            if (rs.next()) {
+                int userid = rs.getInt("userID");
+                String userName = rs.getString("username");
+                String Password = rs.getString("password");
+                String email = rs.getString("email");
+                String userType = rs.getString("userType");
+                user = new User(userid, userName, Password, email, userType);
+            }
+            return user;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** get password", e);
+            throw e;
+        } finally {
+            try {
+                ps.close();
+                rs.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** get password null pointer?", e);
+                throw e;
+            }
+        }
+    }
 }
