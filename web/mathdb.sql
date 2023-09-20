@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 18, 2023 at 09:33 PM
+-- Generation Time: Sep 20, 2023 at 08:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `assignments`
 --
+
+
 
 CREATE TABLE `assignments` (
   `assignmentID` int(11) NOT NULL,
@@ -72,6 +74,7 @@ INSERT INTO `classes` (`classID`, `className`, `description`) VALUES
 
 CREATE TABLE `parent` (
   `parentID` int(11) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `userID` int(11) NOT NULL
@@ -81,8 +84,8 @@ CREATE TABLE `parent` (
 -- Dumping data for table `parent`
 --
 
-INSERT INTO `parent` (`parentID`, `firstName`, `lastName`, `userID`) VALUES
-(1, 'Dylan', 'Tran', 1);
+INSERT INTO `parent` (`parentID`, `password`, `firstName`, `lastName`, `userID`) VALUES
+(1, 'password3', 'John', 'Smith', 1);
 
 -- --------------------------------------------------------
 
@@ -262,7 +265,7 @@ ALTER TABLE `studentscores`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
