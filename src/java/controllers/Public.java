@@ -5,6 +5,7 @@
 package controllers;
 
 import business.User;
+import data.MathDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -35,15 +36,15 @@ public class Public extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         Logger LOG = Logger.getLogger(Public.class.getName());
-        
+
         String url = "/index.jsp";
         String action = request.getParameter("action");
         if (action == null) {
             action = "default";
         }
-        
+
         switch (action) {
             case "gotologin": {
                 url = "/login.jsp";
@@ -71,17 +72,17 @@ public class Public extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(Public.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 SecretKeyCredentialHandler ch = null;
                 String hash = "";
-                
+
                 try {
                     ch = new SecretKeyCredentialHandler();
                     ch.setAlgorithm("PBKDF2WithHmacSHA256");
                     ch.setKeyLength(256);
                     ch.setSaltLength(16);
                     ch.setIterations(4096);
-                    
+
                     hash = ch.mutate(password);
                 } catch (Exception ex) {
                     LOG.log(Level.SEVERE, null, ex);
@@ -94,8 +95,9 @@ public class Public extends HttpServlet {
                     try {
                         User userInfo = MathDB.getUserInfo(username);
                         String email = userInfo.getEmail();
+                        String userType = userInfo.getUserType();
 
-                        User loggedInUser = new User(userID, username, password, email);
+                        User loggedInUser = new User(userID, username, password, email, userType);
                         request.getSession().setAttribute("loggedInUser", loggedInUser);
                         url = "/Private?action=selectAllStatus"; //This needs changed.
                     } catch (SQLException ex) {
@@ -118,8 +120,7 @@ public class Public extends HttpServlet {
                 break;
             }
         }
-       
-        
+
         getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }

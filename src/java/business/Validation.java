@@ -4,6 +4,7 @@
  */
 package business;
 
+import data.MathDB;
 import java.sql.SQLException;
 import java.util.HashMap;
 
