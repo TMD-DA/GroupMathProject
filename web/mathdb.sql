@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `assignments`
 --
 
+
+
 CREATE TABLE `assignments` (
   `assignmentID` int(11) NOT NULL,
   `assignmentType` varchar(20) NOT NULL,

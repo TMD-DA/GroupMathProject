@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,10 @@
             <main>
                 <p>Please log in by clicking the button bellow.</p>
             </main>
-            <button>Login</button>
+            <form action="Public" method="post">
+                <input type="hidden" name="action" value="gotologin">
+                <input type="submit" value="Login">
+            </form>
         </div>
         <footer>
             <p>Copyright &#169;2023</p>

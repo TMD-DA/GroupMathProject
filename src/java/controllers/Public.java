@@ -4,12 +4,19 @@
  */
 package controllers;
 
+import business.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.apache.catalina.realm.SecretKeyCredentialHandler;
 
 /**
  *
@@ -28,19 +35,93 @@ public class Public extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Public</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Public at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        Logger LOG = Logger.getLogger(Public.class.getName());
+        
+        String url = "/index.jsp";
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "default";
         }
+        
+        switch (action) {
+            case "gotologin": {
+                url = "/login.jsp";
+            }
+            case "login": {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                int userID = 0;
+                try {
+                    userID = MathDB.selectUserID(username);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Public.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                String storedCreds = null;
+
+                if ("".equals(username) || "".equals(password)) {
+                    request.setAttribute("msg", "Please Enter Login Information");
+                    url = "/index.jsp";
+                    break;
+                }
+
+                try {
+                    storedCreds = MathDB.getPasswordForUsername(username);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Public.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                SecretKeyCredentialHandler ch = null;
+                String hash = "";
+                
+                try {
+                    ch = new SecretKeyCredentialHandler();
+                    ch.setAlgorithm("PBKDF2WithHmacSHA256");
+                    ch.setKeyLength(256);
+                    ch.setSaltLength(16);
+                    ch.setIterations(4096);
+                    
+                    hash = ch.mutate(password);
+                } catch (Exception ex) {
+                    LOG.log(Level.SEVERE, null, ex);
+                }
+                boolean doesMatch = ch.matches(password, storedCreds);
+                if (storedCreds == null || !doesMatch) {
+                    request.setAttribute("msg", "invalid credentials");
+                    url = "/index.jsp";
+                } else {
+                    try {
+                        User userInfo = MathDB.getUserInfo(username);
+                        String email = userInfo.getEmail();
+
+                        User loggedInUser = new User(userID, username, password, email);
+                        request.getSession().setAttribute("loggedInUser", loggedInUser);
+                        url = "/Private?action=selectAllStatus"; //This needs changed.
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Public.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+                break;
+            }
+            case "logout": {
+                HttpSession session;
+                session = request.getSession();
+                session.invalidate();
+
+                url = "/Public?action=gotoIndex";
+                break;
+            }
+            case "gotoIndex": {
+                url = "/index.jsp";
+                break;
+            }
+        }
+       
+        
+        getServletContext().getRequestDispatcher(url).forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
