@@ -7,9 +7,7 @@ package controllers;
 import business.User;
 import data.MathDB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -48,6 +46,8 @@ public class Public extends HttpServlet {
         switch (action) {
             case "gotologin": {
                 url = "/login.jsp";
+
+                break;
             }
             case "login": {
                 String username = request.getParameter("username");
@@ -63,7 +63,7 @@ public class Public extends HttpServlet {
 
                 if ("".equals(username) || "".equals(password)) {
                     request.setAttribute("msg", "Please Enter Login Information");
-                    url = "/index.jsp";
+                    url = "/login.jsp";
                     break;
                 }
 
@@ -90,7 +90,7 @@ public class Public extends HttpServlet {
                 boolean doesMatch = ch.matches(password, storedCreds);
                 if (storedCreds == null || !doesMatch) {
                     request.setAttribute("msg", "invalid credentials");
-                    url = "/index.jsp";
+                    url = "/login.jsp";
                 } else {
                     try {
                         User userInfo = MathDB.getUserInfo(username);
@@ -99,7 +99,16 @@ public class Public extends HttpServlet {
 
                         User loggedInUser = new User(userID, username, password, email, userType);
                         request.getSession().setAttribute("loggedInUser", loggedInUser);
-                        url = "/Private?action=selectAllStatus"; //This needs changed.
+                        if (userType.equalsIgnoreCase("Admin")) {
+                            url = "/Private?action=admin"; //This needs changed.
+                        } else if (userType.equalsIgnoreCase("Teacher")) {
+                            url = "/Private?action=teacher"; //This needs changed.
+                        } else if (userType.equalsIgnoreCase("Student")) {
+                            url = "/Private?action=student";
+                        } else {
+                            url = "/Private?action=parent";
+                        }
+
                     } catch (SQLException ex) {
                         Logger.getLogger(Public.class.getName()).log(Level.SEVERE, null, ex);
                     }

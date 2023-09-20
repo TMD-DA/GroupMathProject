@@ -29,7 +29,7 @@ public class ConnectionPool {
         return pool;
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() throws SQLException {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
@@ -39,7 +39,7 @@ public class ConnectionPool {
         }
     }
 
-    public void freeConnection(Connection c) {
+    public void freeConnection(Connection c) throws SQLException {
         try {
             c.close();
         } catch (SQLException e) {

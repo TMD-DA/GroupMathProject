@@ -16,6 +16,13 @@
     <body>
         <h1>Enter Login information below</h1>
     </body>
+    <div>
+        <c:forEach var="errors" items="${message}">
+            <h3>${errors.value}</h3>
+        </c:forEach>
+        <h3>${msg}</h3>
+    </div>
+
     <div class="form">
         <form action="Public" method="post">
             <input type="hidden" name="action" value="login">
