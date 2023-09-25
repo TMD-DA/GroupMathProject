@@ -74,7 +74,7 @@ public class Private extends HttpServlet {
             case "selectStudents": {
                 LinkedHashMap students = new LinkedHashMap();
                 try {
-                    students = MathDB.selectStudents(userID);
+                    students = MathDB.selectStudents();
                     request.setAttribute("students", students);
                 } catch (Exception e) {
                     request.setAttribute("msg", "Failed to get Students");
