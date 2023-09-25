@@ -1,9 +1,3 @@
-<%-- 
-    Document   : createMathTest
-    Created on : Sep 18, 2023, 2:18:02 PM
-    Author     : isaac
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,6 +18,11 @@
             <label>Test</label>
             <br><br>
             <label>class ID : </label>
+            <select name="rating" id="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>        
+             </select>
             <br><br>
             <label>Description: </label>
             <input type="text" name="description">
