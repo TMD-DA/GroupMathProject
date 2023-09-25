@@ -52,6 +52,11 @@ public class Private extends HttpServlet {
                 url = "/Public?action=gotoIndex";
                 break;
             }
+            case "createMathTest": {
+                String assignmentType = request.getParameter("AssignmentType");
+                url = "teacher.jsp";
+                break;
+            }
         }
 
         getServletContext().getRequestDispatcher(url).forward(request, response);

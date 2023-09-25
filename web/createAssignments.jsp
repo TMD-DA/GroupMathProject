@@ -11,7 +11,7 @@
             <input type="hidden" name="action" value="createMathTest">
             <label>Assignment Type: </label>
             <br>
-            <input type="radio" id="drill" name="AssignmentType" value="drill">
+            <input type="radio" id="drill" name="AssignmentType" value="drill" checked="true">
             <label>Drill</label>
             <br>
             <input type="radio" id="test" name="AssignmentType" value="test">
@@ -21,7 +21,6 @@
             <select name="rating" id="rating">
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="3">3</option>        
              </select>
             <br><br>
             <label>Description: </label>
