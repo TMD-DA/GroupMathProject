@@ -5,9 +5,12 @@
 package controllers;
 
 import business.User;
+import business.Validation;
 import data.MathDB;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -114,6 +117,60 @@ public class Public extends HttpServlet {
                     }
 
                 }
+                break;
+            }
+            case "register": {
+                HashMap<String, String> errors = new HashMap();
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String email = request.getParameter("email");
+                String firstName = request.getParameter("firstname");
+                String lastName = request.getParameter("lastname");
+                String userType = request.getParameter("usertype");
+                String hash = "";
+                
+                SecretKeyCredentialHandler ch;
+                
+                try {
+                    ch = new SecretKeyCredentialHandler();
+                    ch.setAlgorithm("PBKDF2WithHmacSHA256");
+                    ch.setKeyLength(256);
+                    ch.setSaltLength(16);
+                    ch.setIterations(4096);
+
+                    hash = ch.mutate(password);
+                } catch (Exception ex) {
+                    LOG.log(Level.SEVERE, null, ex);
+                }
+
+                //need to add validation once complete
+                User user = new User();
+
+                String validUsername = Validation.isValidUsername(username, "Username", errors);
+                String validPassword = Validation.isValidPassword(password, "Password", errors);
+                String validEmail = Validation.isValidEmail(email, "Email", errors);                
+                
+                if (errors.isEmpty()) {
+                    user.setUsername(validUsername);
+                    user.setPassword(hash);
+                    user.setEmail(validEmail);
+                    user.setFirstName(firstName);
+                    user.setLastName(lastName);
+                    user.setUserType(userType);
+
+                    try {
+                        MathDB.insertUser(user);
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Public.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                request.setAttribute("user", user);
+                request.setAttribute("message", errors);
+                
+                url = "/register.jsp";
+
                 break;
             }
             case "logout": {
