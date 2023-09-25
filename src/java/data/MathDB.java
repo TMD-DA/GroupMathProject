@@ -4,7 +4,10 @@
  */
 package data;
 
+import business.Assignment;
 import business.Parent;
+import business.Question;
+import business.StudentScore;
 import business.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -348,4 +351,136 @@ public class MathDB {
             }
         }
     }
+    
+    public static ArrayList<Question> getAssignmentWithQuestions(int assignmentID)throws SQLException {
+        ArrayList<Question> questions = new ArrayList();
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query
+                = "SELECT * "
+                + "FROM questions "
+                + "WHERE assignmentID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, assignmentID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int questionID = rs.getInt("questionID");
+                String question = rs.getString("question");
+                String answer = rs.getString("answer");
+                Question tempQuestion = new Question(questionID, assignmentID, question, answer);
+                questions.add(tempQuestion);
+            }
+            return questions;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** get password", e);
+            throw e;
+        } finally {
+            try {
+                ps.close();
+                rs.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** get password null pointer?", e);
+                throw e;
+            }
+        }
+    }
+    
+    public static ArrayList<Assignment> getClassAssignments(int classID)throws SQLException {
+        ArrayList<Assignment> assignments = new ArrayList();
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query
+                = "SELECT * "
+                + "FROM assignments "
+                + "WHERE classID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, classID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int assignmentID = rs.getInt("assignmentID");
+                String assignmentType = rs.getString("assignmentType");
+                String description = rs.getString("desciption");
+                Assignment tempAssignment = new Assignment(assignmentID, assignmentType, classID, description);
+                assignments.add(tempAssignment);
+            }
+            return assignments;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** get password", e);
+            throw e;
+        } finally {
+            try {
+                ps.close();
+                rs.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** get password null pointer?", e);
+                throw e;
+            }
+        }
+    }
+    
+    public static ArrayList<StudentScore> getStudentScores(int userID) throws SQLException {
+        ArrayList<StudentScore> scores = new ArrayList();
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query
+                = "SELECT * "
+                + "FROM studentscores "
+                + "WHERE userID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int resultID = rs.getInt("resultID");
+                int assignmentID = rs.getInt("assignmentID");
+                Double resultScore = rs.getDouble("resultScore");
+                Double resultWeight = rs.getDouble("resultWeight");
+                StudentScore score = new StudentScore(resultID, assignmentID, userID, resultScore, resultWeight);
+                scores.add(score);
+            }
+            return scores;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** get password", e);
+            throw e;
+        } finally {
+            try {
+                ps.close();
+                rs.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** get password null pointer?", e);
+                throw e;
+            }
+        }
+    } 
+    
+    public static Double getStudentPercentage(int userID) throws SQLException {
+        ArrayList<StudentScore> scores = MathDB.getStudentScores(userID);
+        double weightTotal = 0;
+        double currentScore = 0;
+        for(StudentScore s: scores) {
+            double resultScore = s.getResultScore();
+            double resultWeight = s.getResultWeight();
+            weightTotal += resultWeight;
+            currentScore += weightTotal * resultScore * 0.01;
+        } 
+        double percentage = currentScore / weightTotal;
+        percentage = (Math.round(percentage * 100)) / 100;
+        return percentage;
+    }
+    
+    
 }
