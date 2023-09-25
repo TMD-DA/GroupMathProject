@@ -15,7 +15,6 @@
             <a href="updateTestPool.jsp">Update to Test Pool</a>
             <a href="viewTest.jsp">View Test</a> 
             <a href="viewData.jsp">View Data</a>
-            <a href="email.jsp">Email</a>
         </p>
         </header>
     </body>
