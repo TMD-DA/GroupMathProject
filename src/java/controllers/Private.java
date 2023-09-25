@@ -5,8 +5,15 @@
 package controllers;
 
 import business.User;
+import data.MathDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,9 +59,62 @@ public class Private extends HttpServlet {
                 url = "/Public?action=gotoIndex";
                 break;
             }
-            case "createMathTest": {
-                String assignmentType = request.getParameter("AssignmentType");
-                url = "teacher.jsp";
+            case "selectQuestions": {
+                url = "./createAssignments.jsp";
+                
+                LinkedHashMap questions = new LinkedHashMap();
+                try {
+                    questions = MathDB.selectQuestions(questionID);
+                    request.setAttribute("questions", questions);
+                } catch (Exception e) {
+                    request.setAttribute("msg", "Failed to get Questions");
+                }
+                break;
+            }
+            case "selectStudents": {
+                LinkedHashMap students = new LinkedHashMap();
+                try {
+                    students = MathDB.selectStudents();
+                    request.setAttribute("students", students);
+                } catch (Exception e) {
+                    request.setAttribute("msg", "Failed to get Students");
+                }
+                break;
+            }
+            case "selectTestResults": {
+                LinkedHashMap results = new LinkedHashMap();
+                try {
+                    results = MathDB.selectResults(resultID);
+                    request.setAttribute("results", results);
+                } catch (Exception e) {
+                    request.setAttribute("msg", "Failed to get Results");
+                }
+                break;
+            }
+            case "deleteUser": {
+                int userID = 0;
+                try {
+                    userID = Integer.parseInt(request.getParameter("userID"));
+                } catch (Exception e) {
+                    request.setAttribute("msg", "Failed to parse int");
+                }
+                try {
+                    MathDB.deleteUser(userID);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Private.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+            case "student": {
+                url = "/student.jsp";
+                break;
+            }
+            case "teacher": {
+                url = "/teacher.jsp";
+                break;
+            }
+            case "admin": {
+                url = "/admin.jsp";
                 break;
             }
         }

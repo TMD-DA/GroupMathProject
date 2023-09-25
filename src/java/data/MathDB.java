@@ -471,6 +471,8 @@ public class MathDB {
         ArrayList<StudentScore> scores = MathDB.getStudentScores(userID);
         double weightTotal = 0;
         double currentScore = 0;
+        // Result score is the score as a percentage, ie. if a student got a 95/100, the resultScore would be 95
+        // Result weight is the amount of points that the assignment is worth in the class
         for(StudentScore s: scores) {
             double resultScore = s.getResultScore();
             double resultWeight = s.getResultWeight();
@@ -482,5 +484,44 @@ public class MathDB {
         return percentage;
     }
     
-    
+    public static LinkedHashMap<String, User> selectStudents() throws SQLException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "SELECT * FROM users"
+                + "WHERE userType = student";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            User user = null;
+            LinkedHashMap<String, User> users = new LinkedHashMap();
+
+            while (rs.next()) {
+                int userID = rs.getInt("userID");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String email = rs.getString("email");
+                String userType = rs.getString("userType");
+                user = new User(userID, username, password, firstName, lastName, email, userType);
+                users.put(user.getUsername(), user);
+            }
+            return users;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** select all sql", e);
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** select all null pointer?", e);
+                throw e;
+            }
+        }
+    }
 }
