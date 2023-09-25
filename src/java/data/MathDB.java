@@ -471,6 +471,8 @@ public class MathDB {
         ArrayList<StudentScore> scores = MathDB.getStudentScores(userID);
         double weightTotal = 0;
         double currentScore = 0;
+        // Result score is the score as a percentage, ie. if a student got a 95/100, the resultScore would be 95
+        // Result weight is the amount of points that the assignment is worth in the class
         for(StudentScore s: scores) {
             double resultScore = s.getResultScore();
             double resultWeight = s.getResultWeight();
