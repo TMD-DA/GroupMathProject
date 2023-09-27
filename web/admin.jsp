@@ -27,6 +27,10 @@
                     <input type="hidden" name="action" value="gotoregister">
                     <input type="submit" value="Register User">
                 </form>
+                <form action="Private">
+                    <input type="hidden" name="action" value="gotodelete">
+                    <input type="submit" value="Delete User">
+                </form>
             </div>
         </div>
     </body>
