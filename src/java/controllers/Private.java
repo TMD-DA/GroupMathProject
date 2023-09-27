@@ -116,8 +116,13 @@ public class Private extends HttpServlet {
             case "admin": {
                 url = "/admin.jsp";
                 break;
-                case "parent":
+            }
+            case "parent": {
                 url = "/parent-dashboard.jsp";
+                break;
+            }
+            case "gotoregister": {
+                url = "/register.jsp";
                 break;
             }
         }

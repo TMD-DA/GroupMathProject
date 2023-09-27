@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin page</title>
+        <link rel="stylesheet" type="text/css" href="group.css" />
     </head>
     <body>
         <div id="wrapper">
@@ -20,7 +21,12 @@
                     <input type="hidden" name="action" value="logout">
                     <input type="submit" value="Logout">
                 </form>
-                
+            </div>
+            <div>
+                <form action="Private">
+                    <input type="hidden" name="action" value="gotoregister">
+                    <input type="submit" value="Register User">
+                </form>
             </div>
         </div>
     </body>
