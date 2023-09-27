@@ -20,14 +20,16 @@
             <header>
                 <h1>Welcome to Math School!</h1>
             </header>
-            
+
             <main>
                 <p>Please log in by clicking the button bellow.</p>
             </main>
-            <form action="Public" method="post">
-                <input type="hidden" name="action" value="gotologin">
-                <input type="submit" value="Login">
-            </form>
+            <div class="form">
+                <form action="Public" method="post">
+                    <input type="hidden" name="action" value="gotologin">
+                    <input type="submit" value="Login">
+                </form>
+            </div>
         </div>
         <footer>
             <p>Copyright &#169;2023</p>
