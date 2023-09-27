@@ -17,10 +17,10 @@
         <div id="wrapper">
             <header>
                 <h1>Register To Our Site</h1>
-            </header>
+            </header> 
             <nav>
-                
-            </nav>   
+                <a href="Private?action=gotoadmin">Back to Admin page</a>
+            </nav>
             <main>
                 <div class="logout">
                     <form action="Public">

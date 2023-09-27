@@ -22,7 +22,7 @@
                     <input type="submit" value="Logout">
                 </form>
             </div>
-            <div>
+            <div class="form">
                 <form action="Private">
                     <input type="hidden" name="action" value="gotoregister">
                     <input type="submit" value="Register User">

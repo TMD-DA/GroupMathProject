@@ -125,6 +125,10 @@ public class Private extends HttpServlet {
                 url = "/register.jsp";
                 break;
             }
+            case "gotoadmin": {
+                url = "/admin.jsp";
+                break;
+            }
         }
 
         getServletContext().getRequestDispatcher(url).forward(request, response);
