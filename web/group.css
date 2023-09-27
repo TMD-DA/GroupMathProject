@@ -1,0 +1,192 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Mar 23, 2023, 5:26:31 PM
+    Author     : tmdel
+*/
+
+/*Site Creation Project*/
+/*Dustin Andersen*/
+
+body
+{	background-color: #A3A6D5;
+	padding: 3px 3px 3px 3px;
+}
+
+nav
+{	border-style: solid;
+	border-width: 1px;
+	border-color: #28A4A8;
+	padding: 5px 5px 5px 5px;
+}
+
+a
+{	text-decoration: none;
+}
+
+a:link
+{	color: #3B61C9;
+}
+
+a:visited
+{	color: #AA6D5;
+}
+
+a:hover
+{	color: #28A4A8;
+}
+
+
+#wrapper 
+{	background-color: #E1E4E6;
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	border-width: 5px;
+	border-color: #28A4A8;
+	padding: 5px 5px 5px 5px;
+}
+
+footer
+{	text-align: center;
+	font-style: italic;
+	font-size: small;
+	background-color: #CCCCFF;
+	clear: both;
+}
+
+ul
+{
+        list-style-type: none;
+}
+
+form
+{
+        border: 3px solid;
+        border-color: #2BA4A8;
+        border-collapse: collapse;
+        color: #3B4455;
+        width: 100%;
+}
+
+div.form
+{
+        display: block;
+        text-align: center;
+}
+
+div.logout
+{
+        display: block;
+        text-align: right;
+}
+
+h3
+{
+        font-family: "Times New Roman", serif;
+        color: #3B4455;
+        font-size: 130%;
+        background-color: #8592B9;
+        margin: 5px 5px 5px 5px;
+        padding: 3px;
+        text-align: center;
+}
+
+h2
+{	font-family: "Times New Roman", serif;
+	color: #3B4455;
+	font-size: 160%;
+	background-color: #8592B9;
+	margin: 5px 5px 5px 5px;
+	padding: 3px;
+	text-align: center;
+}
+
+h1
+{	font-family: "Times New Roman", serif;
+	color: #3B4455;
+	font-size: 190%;
+	background-color: #3B61C9;
+	margin: 1px 1px 1px 1px;
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+p
+{	font-family: "Times New Roman", serif;
+	color: #3B4455;
+	margin-right: 7px;
+	margin-left: 7px;
+}
+
+@media screen and (max-width: 900px) {
+	.column {
+		flex: 100%;
+		max-width: 100%;
+	}
+	body {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#wrapper {
+		padding: 0px;
+		width: auto;
+	}
+
+	header {
+		background-size: 95px;
+		height: 95px;
+	}
+
+	h1 {
+		padding-top: 20px;
+		margin-left: 0px;
+	}
+
+
+}
+
+@media screen and (max-width: 480px) {
+	.column {
+		flex: 100%;
+		max-width: 100%;
+	}
+
+	body { 
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#wrapper {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	header {
+		background-size: 70px;
+		height: 70px;
+	}
+
+	h1 {
+		padding-top: 15px;
+		margin-left: 0px;
+		font-size: 2em;
+		letter-spacing: normal;
+	}
+
+	main {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	nav { 
+		text-align: left;
+		padding: 5px 5px 5px 5px;
+		margin-top: 25px;
+	}
+
+}

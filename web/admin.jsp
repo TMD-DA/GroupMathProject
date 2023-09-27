@@ -13,8 +13,19 @@
         <title>Admin page</title>
     </head>
     <body>
-        <h1>Welcome to the admin page, here you will be able to conduct admin actions.</h1>
+        <div id="wrapper">
+            <h1>Welcome to the admin page, here you will be able to conduct admin actions.</h1>
+            <div class="logout">
+                <form action="Public">
+                    <input type="hidden" name="action" value="logout">
+                    <input type="submit" value="Logout">
+                </form>
+                
+            </div>
+        </div>
     </body>
+
+
 </html>
 
 
