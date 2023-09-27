@@ -56,6 +56,36 @@ public class MathDB {
             }
         }
     }
+    
+    public static void deleteUser(int userID) throws SQLException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query
+                = "DELETE "
+                + "FROM users "
+                + "WHERE userID = ?";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** get password", e);
+            throw e;
+        } finally {
+            try {
+                ps.close();
+                rs.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** delete user null pointer?", e);
+                throw e;
+            }
+        }
+    }
 
     public static int insertParent(Parent parent) throws SQLException {
         ConnectionPool pool = ConnectionPool.getInstance();
