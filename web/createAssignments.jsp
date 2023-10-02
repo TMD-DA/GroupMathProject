@@ -14,9 +14,8 @@
         </style>
     </head>
     <body>
-        <a href="#main-content" id="stmc">Skip to Main Content</a>
-        <h1 id="main-content">Create Math Assignment</h1>
-        <form action="Private" method="post">
+        <h1>Create Math Assignment</h1>
+        <form  method="post" action="Private">
             <input type="hidden" name="action" value="createMathTest">
             <label>Assignment Type: </label>
             <br>

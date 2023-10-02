@@ -16,8 +16,11 @@
             <input type="text" name="answer">
             <br><br>
             <label>Assignment: </label>
-            <input type="text" name="AssignmentID">
-            <br><br>
+            <select name="assignmentID" id="assignmentID">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+             </select>
+            <br>
             <input type="submit" value="Create">
         </form>
     </body>

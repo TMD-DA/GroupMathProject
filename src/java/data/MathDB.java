@@ -554,4 +554,98 @@ public class MathDB {
             }
         }
     }
+    public static int insertAssignment(Assignment assignment) throws SQLException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+
+        String query
+                = "INSERT INTO assignments (assignmentType, classID, description) "
+                + "VALUES (?, ?, ?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, assignment.getAsignmentType());
+            ps.setInt(2, assignment.getClassID());
+            ps.setString(3, assignment.getDescription());
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** insert sql", e);
+            throw e;
+        } finally {
+            try {
+                ps.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** insert null pointer?", e);
+                throw e;
+            }
+        }
+    }
+    
+    public static int insertQuestion(Question question) throws SQLException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+
+        String query
+                = "INSERT INTO questions (assignmentID, question, answer) "
+                + "VALUES (?, ?, ?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, question.getAssignmentID());
+            ps.setString(2, question.getQuestion());
+            ps.setString(3, question.getAnswer());
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** insert sql", e);
+            throw e;
+        } finally {
+            try {
+                ps.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** insert null pointer?", e);
+                throw e;
+            }
+        }
+    }
+    public static LinkedHashMap<Integer, Question> selectAllQuestions() throws SQLException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "SELECT * FROM questions";
+        try {
+            ps = connection.prepareStatement(query);
+
+            rs = ps.executeQuery();
+            Question question = null;
+            LinkedHashMap<Integer, Question> questions = new LinkedHashMap();
+
+            while (rs.next()) {
+                int questionID = rs.getInt("questionID");
+                int assignmentID = rs.getInt("assignmentID");
+                String quizQuestion  = rs.getString("question");
+                String answer = rs.getString("answer");
+                question = new Question();
+                questions.put(question.getQuestionID(), question);
+            }
+            return questions;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "*** select all sql", e);
+            throw e;
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                pool.freeConnection(connection);
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, "*** select all null pointer?", e);
+                throw e;
+            }
+        }
+    }
 }

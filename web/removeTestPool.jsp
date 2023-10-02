@@ -16,8 +16,7 @@
         </style>
     </head>
     <body>
-        <a href="#main-content" id="stmc">Skip to Main Content</a>
-        <h1 id="main-content">Remove Test Pool Question</h1>
+        <h1>Remove Test Pool Question</h1>
         <form action="Private" method="post">
             <input type="hidden" name="action" value="RemoveTestPool">
             <table>
