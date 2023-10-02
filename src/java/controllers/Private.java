@@ -4,6 +4,8 @@
  */
 package controllers;
 
+import business.Assignment;
+import business.Question;
 import business.User;
 import data.MathDB;
 import java.io.IOException;
@@ -127,6 +129,49 @@ public class Private extends HttpServlet {
             }
             case "gotoadmin": {
                 url = "/admin.jsp";
+                break;
+            }
+            case "createMathTest": {
+                int ID = 0;
+                String assignmentType = request.getParameter("AssignmentType");
+                String stringID = request.getParameter("rating");
+                String description = request.getParameter("description");
+
+                try {
+                    ID = Integer.parseInt(stringID);
+                } catch (Exception e) {
+                    request.setAttribute("msg", "Class ID needs to be a whole number");
+                }
+
+                Assignment newAssignment = new Assignment(assignmentType, ID, description);
+
+                try {
+                    MathDB.insertAssignment(newAssignment);
+                } catch (Exception e) {
+                    request.setAttribute("msg", e);
+                }
+                url = "/teacher.jsp";
+                break;
+            }
+            case "addTestPool": {
+                int ID = 0;
+                String question = request.getParameter("question");
+                String answer = request.getParameter("answer");
+                String stringAssignmentID = request.getParameter("assignmentID");
+
+                try {
+                    ID = Integer.parseInt(stringAssignmentID);
+                } catch (Exception e) {
+                    request.setAttribute("msg", "Assignment ID needs to be a whole number");
+                }
+                Question newQuestion = new Question(ID, question, answer);
+
+                try {
+                    MathDB.insertQuestion(newQuestion);
+                } catch (SQLException e) {
+                    request.setAttribute("msg", e);
+                }
+                url = "/teacher.jsp";
                 break;
             }
         }

@@ -21,7 +21,13 @@ public class Assignment {
         this.asignmentType = asignmentType;
         this.description = description;
     }
-
+    
+    public Assignment(String asignmentType, int classID, String description) {
+        this.classID = classID;
+        this.asignmentType = asignmentType;
+        this.description = description;
+    }
+    
     public int getAssignmentID() {
         return assignmentID;
     }

@@ -21,7 +21,13 @@ public class Question {
         this.question = question;
         this.answer = answer;
     }
-
+    
+    public Question(int assignmentID, String question, String answer) {
+        this.assignmentID = assignmentID;
+        this.question = question;
+        this.answer = answer;
+    }
+    
     public int getQuestionID() {
         return questionID;
     }
