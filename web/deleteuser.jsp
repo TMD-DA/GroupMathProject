@@ -10,8 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            a#stmc {
+                position: absolute;
+                top: 999999px;
+                left: -999999px;
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        as href="#main-content" id="stmc">Skip to Main Content</a>
+        <h1 id="main-content">Hello World!</h1>
     </body>
 </html>

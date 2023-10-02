@@ -7,9 +7,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Update Test Pool</title>
+        <style>
+            a#stmc {
+                position: absolute;
+                top: 999999px;
+                left: -999999px;
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
-        <h1>Update Test Pool</h1>
+        <a href="#main-content" id="stmc">Skip to Main Content</a>
+        <h1 id="main-content">Update Test Pool</h1>
         <form action="Private" method="post">
             <input type="hidden" name="action" value="UpdateTestPool">
             <table>

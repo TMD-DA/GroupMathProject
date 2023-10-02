@@ -12,10 +12,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin page</title>
         <link rel="stylesheet" type="text/css" href="group.css" />
+        <style>
+            a#stmc {
+                position: absolute;
+                top: 999999px;
+                left: -999999px;
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
+        <a href="#main-content">Skip to Main Content</a
+            >
         <div id="wrapper">
-            <h1>Welcome to the admin page, here you will be able to conduct admin actions.</h1>
+            <h1 id="main-content">Welcome to the admin page, here you will be able to conduct admin actions.</h1>
             <div class="logout">
                 <form action="Public">
                     <input type="hidden" name="action" value="logout">

@@ -13,9 +13,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
         <link rel="stylesheet" type="text/css" href="group.css" />
+        <style>
+            a#stmc {
+                position: absolute;
+                top: 999999px;
+                left: -999999px;
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
-        <h1>Enter Login information below</h1>
+        <a href="#main-content" id="stmc">Skip to Main Content</a
+            >
+        <h1 id="main-content">Enter Login information below</h1>
     </body>
     <div>
         <c:forEach var="errors" items="${message}">
