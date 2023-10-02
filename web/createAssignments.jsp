@@ -4,6 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Math Assignment</title>
+        <link rel="stylesheet" type="text/css" href="group.css" />
+
         <style>
             a#stmc {
                 position: absolute;
@@ -27,9 +29,9 @@
             <br><br>
             <label>class ID : </label>
             <select name="rating" id="rating">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-             </select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
             <br><br>
             <label>Description: </label>
             <input type="text" name="description">

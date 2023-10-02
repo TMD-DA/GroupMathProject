@@ -4,6 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Teacher Page</title>
+        <link rel="stylesheet" type="text/css" href="group.css" />
+
         <style>
             a#stmc {
                 position: absolute;
@@ -16,18 +18,18 @@
     <body>
         <a href="#main-content" id="stmc">Skip to Main Content</a>
         <header>
-        <h1>Teacher Page</h1>
-        <p> 
-            <a href="createAssignments.jsp">Create Math Assignment</a> 
-            <a href="addTestPool.jsp">Add to Test Pool</a>
-            <a href="removeTestPool.jsp">Remove to Test Pool</a>
-            <a href="updateTestPool.jsp">Update to Test Pool</a>
-            <a href="viewTest.jsp">View Test</a> 
-            <a href="viewData.jsp">View Data</a>
-        </p>
+            <h1>Teacher Page</h1>
+            <p> 
+                <a href="createAssignments.jsp">Create Math Assignment</a> 
+                <a href="addTestPool.jsp">Add to Test Pool</a>
+                <a href="removeTestPool.jsp">Remove to Test Pool</a>
+                <a href="updateTestPool.jsp">Update to Test Pool</a>
+                <a href="viewTest.jsp">View Test</a> 
+                <a href="viewData.jsp">View Data</a>
+            </p>
         </header>
         <main id="main-content">
-            
+
         </main>
     </body>
 </html>

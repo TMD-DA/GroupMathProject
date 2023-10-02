@@ -7,6 +7,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Test</title>
+        <link rel="stylesheet" type="text/css" href="group.css" />
+
         <style>
             a#stmc {
                 position: absolute;
@@ -28,12 +30,12 @@
                     <th>Description</th>
                 </tr>
                 <c:forEach var="assignment" items="${assignments}">
-                   <tr>
-                       <input type="hidden" name="assignmentID" value="${assignment.value.assignmentID}">
-                        <td>${assignment.value.assignmentType}</td>
-                        <td>${assignment.value.classID}</td>
-                        <td>${assignment.value.description}</td>
-                        <input type="submit" value="View Results">
+                    <tr>
+                    <input type="hidden" name="assignmentID" value="${assignment.value.assignmentID}">
+                    <td>${assignment.value.assignmentType}</td>
+                    <td>${assignment.value.classID}</td>
+                    <td>${assignment.value.description}</td>
+                    <input type="submit" value="View Results">
                     </tr>
                 </c:forEach>
             </table>

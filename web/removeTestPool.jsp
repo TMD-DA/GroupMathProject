@@ -6,6 +6,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Remove Test Pool Question</title>
+        <link rel="stylesheet" type="text/css" href="group.css" />
+
         <style>
             a#stmc {
                 position: absolute;
@@ -27,12 +29,12 @@
                     <th>Answer</th>
                 </tr>
                 <c:forEach var="question" items="${questions}">
-                   <tr>
-                       <input type="hidden" name="questionID" value="${question.value.questionID}">
-                        <td>${question.value.assignmentID}</td>
-                        <td>${question.value.question}</td>
-                        <td>${question.value.answer}</td>
-                        <input type="submit" value="Delete">
+                    <tr>
+                    <input type="hidden" name="questionID" value="${question.value.questionID}">
+                    <td>${question.value.assignmentID}</td>
+                    <td>${question.value.question}</td>
+                    <td>${question.value.answer}</td>
+                    <input type="submit" value="Delete">
                     </tr>
                 </c:forEach>
             </table>
