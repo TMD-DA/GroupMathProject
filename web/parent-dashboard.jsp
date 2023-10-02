@@ -11,11 +11,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Parent Dashboard</title>
         <style>
-            * { font-family: sans-serif; }
+            * { font-family: sans-serif; 
+            
+                a {
+                    text-decoration: none;
+                }
+            
+                a#stmc {
+                position: absolute;
+                top: 999999px;
+                left: -999999px;
+            }}
             
         </style>
     </head>
     <body>
+        <a href=""#main-content" id="stmc">Skip to Main Content</a>
         <h1>Parent Dashboard</h1>
     </body>
 </html>
