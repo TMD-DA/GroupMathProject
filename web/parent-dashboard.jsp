@@ -43,7 +43,7 @@
         <a href=""#main-content" id="stmc">Skip to Main Content</a>
 
         <main id=main-content"">
-            <h1>Welcome to the Parent Dashboard, Din Djarin</h1>
+    <h1>Welcome to the Parent Dashboard, ${loggedInUser != null ? loggedInUser.username : "Din Djarin"}</h1>
 
             <h3>You Currently Have 6 People Taking Math Lessons</h3>
             <div id="students-grid">
